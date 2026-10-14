@@ -42,6 +42,7 @@ export default withMermaid(
             { text: 'Roadmap', link: '/plan/roadmap' },
             { text: 'Milestones', link: '/plan/milestones' },
             { text: 'Risk register', link: '/plan/risk-register' },
+            { text: 'Session log', link: '/plan/session-log' },
           ],
         },
         {
