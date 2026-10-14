@@ -1,0 +1,20 @@
+schema: spec-driven
+
+context: |
+  Project: Twine (twinelink) - an open-source cross-device link, a hard fork of
+  KDE Connect. Windows-first. Features: remote desktop (RDP), Wake-on-LAN,
+  clipboard, file transfer, notifications, a modern UX.
+  This repository (twinelink-docs) is the project home and the registered
+  OpenSpec store. It holds cross-cutting specs, architecture, requirements,
+  roadmap and the documentation site (VitePress).
+  Repos in the set: twinelink-desktop (C++/Qt6), twinelink-android (Kotlin/
+  Compose), twinelink-docs (this).
+  Rules: everything committed is in English; SOLID; every feature is an OpenSpec
+  change; no performance claim without measurement.
+  Docs site: VitePress; diagrams in Mermaid; lint with ESLint + Prettier.
+
+rules:
+  proposal:
+    - State FR-/NFR- requirement IDs when applicable.
+  specs:
+    - Keep requirements testable (Given/When/Then scenarios).
