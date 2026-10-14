@@ -3,11 +3,25 @@
 Running project journal. Append new entries at the top. Purpose: let any
 contributor or AI agent continue the work across sessions. English only.
 
+## 2026-10-14 - Dev environment ready (desktop, M1 enabler)
+
+Installed a reproducible local Windows build for the desktop client:
+
+- KDE Craft bootstrapped at `C:\CraftRoot` (ABI `windows-cl-msvc2022-x86_64`).
+- Visual Studio 2022 C++ toolchain (Community); Craft deps for
+  `kde/applications/kdeconnect-kde` installed from the prebuilt msvc2022 cache.
+- Configured and built the fork: 504/504 targets; binaries in `build/bin`
+  (`kdeconnectd`, `kdeconnect-app`, `kdeconnect-indicator`, `kdeconnect-cli 26.11.70`, tests).
+- Recipe documented in `docs/development/build-desktop.md`.
+
+Consequence: M1 (`windows-startup-perf`) is now verifiable locally
+(build + run + measure), not just by CI.
+
 ## 2026-10-14 - Inception and M0 foundation
 
 ### Context
 
-Goal: fork KDE Connect into **Twine** (identifier `twinelink`) - an open-source
+Goal: fork KDE Connect into **twinelink** (identifier `twinelink`) - an open-source
 cross-device link with a modern UX, remote desktop (RDP) and Wake-on-LAN.
 Windows-first, personal project opened to the community, GPL-2.0-or-later.
 

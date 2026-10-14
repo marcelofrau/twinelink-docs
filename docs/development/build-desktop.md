@@ -1,39 +1,57 @@
-# Building the desktop client
+# Building the desktop client (Windows)
 
-Target: Windows-first, built **off Craft**.
+Target: Windows x64, MSVC (msvc2022 ABI), Qt 6, KDE Frameworks 6.
 
-## Dependencies
+## 1. Craft (one-time, elevated)
 
-- MSVC (`cl`), CMake 3.21+, Ninja.
-- Qt 6 (Core, Gui, Widgets minimal, Network, Quick + QuickControls2 + Qt Quick
-  Compiler, DBus, Svg).
-- KDE Frameworks 6 - **minimal set only**: `KConfig`, `KCoreAddons`,
-  `KDBusAddons`, `KCrash`, `KI18n`, `KSyntaxHighlighting` (if needed).
-  Everything else is removed on Windows (see
-  [desktop architecture](../architecture/desktop.md)).
+Craft is KDE's meta build system and package manager.
 
-> Building Qt6 + KF6 on Windows without Craft is the R-1 risk. This document is
-> completed with the proven recipe once the M1 spike concludes; the recipe and
-> any dead ends are recorded here so they are not repeated.
-
-## Configure & build
+Prerequisites: Developer Mode enabled, Git, Python >= 3.9, Visual Studio 2022
+with the "Desktop development with C++" workload.
+Note: the Craft bootstrap does not support VS2026 yet; VS2022 is required.
 
 ```powershell
-cmake -S . -B build -G Ninja `
-  -DCMAKE_BUILD_TYPE=RelWithDebInfo `
-  -DCMAKE_PREFIX_PATH="$env:QT_ROOT;$env:KF6_ROOT" `
-  -DBUILD_TESTING=ON
-cmake --build build
-ctest --test-dir build --output-on-failure
+iwr https://raw.githubusercontent.com/KDE/craft/master/setup/install_craft.ps1 -OutFile $env:TEMP\install_craft.ps1
+# run elevated; creates C:\CraftRoot
+& $env:TEMP\install_craft.ps1 -use-defaults -root C:\CraftRoot
 ```
 
-## Quality gates
+## 2. Install dependencies (prebuilt msvc2022 cache)
 
-- `clang-format --dry-run --Werror`
-- `clang-tidy` + `cppcheck`
-- warnings-as-errors; ASan/UBSan on a CI debug job.
+```powershell
+. C:\CraftRoot\craft\craftenv.ps1
+craft --install-deps kde/applications/kdeconnect-kde
+```
 
-## Packaging
+## 3. Configure and build the fork
 
-MSIX/installer with code signing; the installer directory is added to Windows
-Defender exclusions per the startup-performance plan.
+```powershell
+. C:\CraftRoot\craft\craftenv.ps1
+cmake -S . -B build -G Ninja -DCMAKE_PREFIX_PATH=C:\CraftRoot -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cmake --build build
+```
+
+Binaries land in `build/bin` (`kdeconnectd.exe`, `kdeconnect-app.exe`,
+`kdeconnect-indicator.exe`, `kdeconnect-cli.exe`, plus test executables).
+
+## 4. Run
+
+Source craftenv first so the Qt/KF runtime DLLs are on PATH:
+
+```powershell
+. C:\CraftRoot\craft\craftenv.ps1
+.\build\bin\kdeconnect-app.exe
+```
+
+## Notes
+
+- If `git`/MinGW are on PATH they conflict with Craft; exclude them (or pin
+  `[Environment] PATH` in `C:\CraftRoot\etc\CraftSettings.ini`).
+- The upstream source is the `craft-blueprints-kde` repository; the
+  `kdeconnect-kde` blueprint provides all dependencies.
+
+## Tests
+
+```powershell
+ctest --test-dir build
+```

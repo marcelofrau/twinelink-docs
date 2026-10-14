@@ -1,6 +1,6 @@
 # AGENTS.md - twinelink-docs
 
-Project home and the registered OpenSpec store for **Twine** (`twinelink`).
+Project home and the registered OpenSpec store for **twinelink** (`twinelink`).
 
 ## Repo role
 
@@ -20,7 +20,7 @@ Project home and the registered OpenSpec store for **Twine** (`twinelink`).
 
 Read `docs/plan/session-log.md` for the running project journal.
 
-## Working rules (all Twine repositories)
+## Working rules (all twinelink repositories)
 
 - Everything committed is in English (docs, code, comments, commits, PRs).
   The maintainer chats in Portuguese and uses a terse, compressed style.
