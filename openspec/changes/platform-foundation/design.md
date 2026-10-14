@@ -1,6 +1,6 @@
 ## Context
 
-Twine spans a C++/Qt desktop client, a Kotlin Android app and a documentation
+twinelink spans a C++/Qt desktop client, a Kotlin Android app and a documentation
 repository. Without written invariants the three drift apart.
 
 ## Decisions
@@ -13,7 +13,7 @@ Control (KDE Connect protocol, TLS, capabilities) is separate from transport
 ### D2: Protocol unchanged
 
 `kdeconnect.*` identifiers, config dir and device identity are untouched, so
-interop with stock KDE Connect holds and Twine features degrade gracefully.
+interop with stock KDE Connect holds and twinelink features degrade gracefully.
 
 ### D3: One provider interface
 

@@ -1,6 +1,6 @@
-# Contributing to Twine
+# Contributing to twinelink
 
-Thanks for helping. Twine is a hard fork of KDE Connect; see
+Thanks for helping. twinelink is a hard fork of KDE Connect; see
 [docs/adr/0001](docs/adr/0001-fork-strategy.md).
 
 ## Before you start

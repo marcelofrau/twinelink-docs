@@ -1,19 +1,19 @@
 # Architecture overview
 
-Twine separates **control** from **transport**. The trusted Twine connection
-carries intent; heavy media flows over a dedicated transport that Twine
+twinelink separates **control** from **transport**. The trusted twinelink connection
+carries intent; heavy media flows over a dedicated transport that twinelink
 orchestrates but does not implement.
 
 ```mermaid
 flowchart LR
-  subgraph Phone["Android device — Twine app"]
+  subgraph Phone["Android device — twinelink app"]
     AUI[Compose UI]
     ACore[Core + plugins]
     ARDP[FreeRDP client]
   end
 
-  subgraph PC["Windows desktop — Twine"]
-    DDaemon[Twine daemon<br/>control plane]
+  subgraph PC["Windows desktop — twinelink"]
+    DDaemon[twinelink daemon<br/>control plane]
     DUI[Qt Quick UI<br/>resident process]
     DHost[RDP host<br/>native Windows RDP]
     DWol[WoL responder]
@@ -43,7 +43,7 @@ input. **Protocol identifiers remain `kdeconnect.*`** — this is what keeps
 interoperability with stock KDE Connect (see
 [protocol interop](./protocol.md)).
 
-The control plane is extended with Twine capabilities:
+The control plane is extended with twinelink capabilities:
 
 - `twinelink.wol.info` — host offers MAC + broadcast address.
 - `twinelink.remote.session` — host orchestrates an RDP session and returns the
@@ -60,8 +60,8 @@ video — it only negotiates.
 
 | Component     | Repo                | Role                                                                                   |
 | ------------- | ------------------- | -------------------------------------------------------------------------------------- |
-| Twine desktop | `twinelink-desktop` | Daemon (control plane) + resident Qt Quick UI + RDP host orchestration + WoL responder |
-| Twine Android | `twinelink-android` | Compose UI + core + embedded FreeRDP client + WoL sender                               |
+| twinelink desktop | `twinelink-desktop` | Daemon (control plane) + resident Qt Quick UI + RDP host orchestration + WoL responder |
+| twinelink Android | `twinelink-android` | Compose UI + core + embedded FreeRDP client + WoL sender                               |
 | Docs & specs  | `twinelink-docs`    | This site, OpenSpec store, architecture, requirements, roadmap                         |
 | Meta          | `twinelink`         | Submodule superproject tying the repos together                                        |
 
@@ -70,7 +70,7 @@ video — it only negotiates.
 ```mermaid
 flowchart TB
   Tray["Tray + Main window<br/>(one resident process)"]
-  Daemon["Twine daemon<br/>control plane"]
+  Daemon["twinelink daemon<br/>control plane"]
   Tray <-- DBus --> Daemon
 ```
 

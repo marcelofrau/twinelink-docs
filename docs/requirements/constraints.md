@@ -35,6 +35,6 @@ Hard constraints the project must respect. These are not preferences.
 
 - **C-30** Everything committed is in **English**.
 - **C-31** Upstream KDE does not accept AI-engineered contributions
-  (`AGENTS.md`); Twine is a hard fork and does not send MRs upstream.
+  (`AGENTS.md`); twinelink is a hard fork and does not send MRs upstream.
 - **C-32** Every feature is delivered through an OpenSpec change (proposal →
   specs → design → tasks) before code.

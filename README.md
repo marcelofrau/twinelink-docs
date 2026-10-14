@@ -1,8 +1,8 @@
-# Twine documentation
+# twinelink documentation
 
-Home of Twine architecture, requirements, roadmap and specifications.
+Home of twinelink architecture, requirements, roadmap and specifications.
 
-> Twine links your devices: remote desktop (RDP), Wake-on-LAN, file transfer,
+> twinelink links your devices: remote desktop (RDP), Wake-on-LAN, file transfer,
 > clipboard, notifications and a modern cross-platform UX. Open source, a hard
 > fork of KDE Connect.
 

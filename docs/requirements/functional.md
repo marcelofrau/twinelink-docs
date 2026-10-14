@@ -37,6 +37,6 @@
   process spawn.
 - **FR-31** The Android UI is modern (Material 3) and consistent with the
   desktop.
-- **FR-40** Twine-only features require the peer to advertise the capability, so
+- **FR-40** twinelink-only features require the peer to advertise the capability, so
   stock KDE Connect peers are unaffected.
 - **FR-41** A peer without a capability never receives packets for that feature.

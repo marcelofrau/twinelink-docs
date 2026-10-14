@@ -1,8 +1,8 @@
 # Protocol & interoperability
 
-Twine speaks the **KDE Connect protocol** on the control plane. This is a
+twinelink speaks the **KDE Connect protocol** on the control plane. This is a
 deliberate constraint (C-10): the wire format and identifiers stay `kdeconnect.*`
-so a Twine device interoperates with a stock KDE Connect peer.
+so a twinelink device interoperates with a stock KDE Connect peer.
 
 ## What stays unchanged
 
@@ -11,7 +11,7 @@ so a Twine device interoperates with a stock KDE Connect peer.
 - Pairing, TLS and discovery.
 - Device identity and identity files.
 
-## What Twine adds
+## What twinelink adds
 
 New capabilities are additive. A peer that does not advertise them simply never
 receives those packets, so the feature hides gracefully (FR-41).
@@ -42,11 +42,11 @@ sequenceDiagram
 ## Compatibility matrix
 
 Maintained in [roadmap](./../plan/roadmap.md) and released per version. A peer
-is "compatible" when it speaks the base protocol; Twine features then depend on
+is "compatible" when it speaks the base protocol; twinelink features then depend on
 advertised capabilities.
 
 ## Discovery note
 
-Discovery (UDP 1716 + mDNS) is unchanged, but Twine scopes/defer it on Windows
+Discovery (UDP 1716 + mDNS) is unchanged, but twinelink scopes/defer it on Windows
 for startup cost reasons (see
 [startup performance](./../architecture/startup-performance.md)).

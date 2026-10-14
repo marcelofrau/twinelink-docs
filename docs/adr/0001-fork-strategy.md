@@ -16,7 +16,7 @@ clients and evolve them. Do **not** rewrite the protocol. Do **not** fork the
 transport projects (FreeRDP, RustDesk, Moonlight) - consume them.
 
 The fork is a **hard fork**: upstream KDE does not accept AI-engineered
-contributions, and Twine direction (Windows-first, custom UI) diverges. An
+contributions, and twinelink direction (Windows-first, custom UI) diverges. An
 `upstream` remote is kept to cherry-pick security fixes.
 
 ## Consequences

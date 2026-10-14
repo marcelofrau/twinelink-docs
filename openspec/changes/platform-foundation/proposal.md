@@ -1,6 +1,6 @@
 ## Why
 
-Twine is a multi-repository project that must keep a stable architecture across
+twinelink is a multi-repository project that must keep a stable architecture across
 components, a protocol that stays interoperable with KDE Connect, and a
 consistent developer experience. These invariants must be written down as specs
 before code diverges.

@@ -1,6 +1,6 @@
 # Licensing
 
-Twine is free and open source.
+twinelink is free and open source.
 
 - **Code** is licensed under **GPL-2.0-or-later**. See
   [LICENSES/GPL-2.0-or-later.txt](./LICENSES/GPL-2.0-or-later.txt).

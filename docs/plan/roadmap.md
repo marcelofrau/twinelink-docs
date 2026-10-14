@@ -1,12 +1,12 @@
 # Roadmap
 
-Twine is delivered in milestones. Each milestone is a set of OpenSpec changes;
+twinelink is delivered in milestones. Each milestone is a set of OpenSpec changes;
 every change has its own proposal, specs, design and checklist under
 [milestones](./milestones.md).
 
 ```mermaid
 gantt
-  title Twine delivery roadmap
+  title twinelink delivery roadmap
   dateFormat YYYY-MM-DD
   axisFormat %Y-%m
   section Foundations

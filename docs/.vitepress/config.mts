@@ -3,7 +3,8 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 
 export default withMermaid(
   defineConfig({
-    title: 'Twine',
+    base: '/twinelink-docs/',
+    title: 'twinelink',
     description: 'Open-source cross-device link with remote desktop (RDP) and Wake-on-LAN.',
     cleanUrls: true,
     mermaid: {},

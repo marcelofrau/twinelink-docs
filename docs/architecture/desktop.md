@@ -9,14 +9,14 @@ to Windows-first and a modern Qt Quick UI.
 - `daemon/` - the `twinelinkd` process.
 - UI components (`app/`, `indicator/`, ...) - **replaced**.
 
-The KDE `core` exposes a **DBus API** and keeps the UI decoupled. Twine keeps
+The KDE `core` exposes a **DBus API** and keeps the UI decoupled. twinelink keeps
 that boundary (NFR-30): the core stays UI-agnostic, and the presentation layer is
 swappable.
 
 ## Target process model
 
 Upstream splits into `kdeconnectd` + `kdeconnect-indicator` + `kdeconnect-app`.
-Twine collapses these into **one resident process** hosting the daemon, the tray
+twinelink collapses these into **one resident process** hosting the daemon, the tray
 and the window, eliminating the cold-start cost of opening the UI. See
 [startup performance](./startup-performance.md).
 

@@ -1,7 +1,7 @@
 # Android architecture
 
 `twinelink-android` is a hard fork of KDE Connect for Android, rewritten to
-Jetpack Compose and extended with the Twine features.
+Jetpack Compose and extended with the twinelink features.
 
 ## Stack
 

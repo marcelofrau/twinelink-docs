@@ -15,14 +15,14 @@ from the transport plane (media), and the control plane SHALL NOT carry media.
 
 ### Requirement: Protocol interoperability
 
-The system SHALL keep KDE Connect protocol identifiers unchanged so that Twine
+The system SHALL keep KDE Connect protocol identifiers unchanged so that twinelink
 peers interoperate with stock KDE Connect peers.
 
 #### Scenario: Stock peer
 
-- **WHEN** a Twine device connects to a stock KDE Connect device
+- **WHEN** a twinelink device connects to a stock KDE Connect device
 - **THEN** base features work
-- **AND** Twine-only features are hidden unless their capabilities are advertised
+- **AND** twinelink-only features are hidden unless their capabilities are advertised
 
 ### Requirement: Pluggable transports
 
