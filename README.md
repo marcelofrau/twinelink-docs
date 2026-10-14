@@ -8,14 +8,14 @@ Home of Twine architecture, requirements, roadmap and specifications.
 
 ## Layout
 
-| Path | Contents |
-| --- | --- |
+| Path                 | Contents                                       |
+| -------------------- | ---------------------------------------------- |
 | `docs/architecture/` | Architecture, protocol, transport, performance |
-| `docs/requirements/` | Functional, non-functional, constraints |
-| `docs/plan/` | Roadmap, milestones, risk register |
-| `docs/development/` | Setup, builds, conventions, testing |
-| `docs/adr/` | Architecture Decision Records |
-| `openspec/` | OpenSpec store (specs hub) |
+| `docs/requirements/` | Functional, non-functional, constraints        |
+| `docs/plan/`         | Roadmap, milestones, risk register             |
+| `docs/development/`  | Setup, builds, conventions, testing            |
+| `docs/adr/`          | Architecture Decision Records                  |
+| `openspec/`          | OpenSpec store (specs hub)                     |
 
 ## Build the docs site
 

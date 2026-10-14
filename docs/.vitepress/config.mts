@@ -4,8 +4,7 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 export default withMermaid(
   defineConfig({
     title: 'Twine',
-    description:
-      'Open-source cross-device link with remote desktop (RDP) and Wake-on-LAN.',
+    description: 'Open-source cross-device link with remote desktop (RDP) and Wake-on-LAN.',
     cleanUrls: true,
     mermaid: {},
     themeConfig: {

@@ -36,11 +36,11 @@ signals:  // Qt signals in the real header
 
 ## Providers
 
-| id | Status | Notes |
-| --- | --- | --- |
-| `freerdp` | MVP | FreeRDP (Apache-2.0), RDPGFX/AVC420, cert pinning |
-| `vnc` | later | libvncclient / TigerVNC |
-| `moonlight` | later | low-latency game streaming |
+| id          | Status | Notes                                             |
+| ----------- | ------ | ------------------------------------------------- |
+| `freerdp`   | MVP    | FreeRDP (Apache-2.0), RDPGFX/AVC420, cert pinning |
+| `vnc`       | later  | libvncclient / TigerVNC                           |
+| `moonlight` | later  | low-latency game streaming                        |
 
 ## Security
 

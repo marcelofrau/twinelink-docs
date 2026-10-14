@@ -16,13 +16,13 @@ so a Twine device interoperates with a stock KDE Connect peer.
 New capabilities are additive. A peer that does not advertise them simply never
 receives those packets, so the feature hides gracefully (FR-41).
 
-| Capability | Direction | Purpose |
-| --- | --- | --- |
-| `twinelink.wol.info` | desktop to phone | expose MAC + broadcast address |
-| `twinelink.wol.wake` | phone to desktop-or-LAN | (LAN fallback) magic packet relay |
-| `twinelink.remote.session` | phone to desktop | request an RDP session |
-| `twinelink.remote.ready` | desktop to phone | host/port/creds/fingerprint |
-| `twinelink.remote.end` | both | session teardown |
+| Capability                 | Direction               | Purpose                           |
+| -------------------------- | ----------------------- | --------------------------------- |
+| `twinelink.wol.info`       | desktop to phone        | expose MAC + broadcast address    |
+| `twinelink.wol.wake`       | phone to desktop-or-LAN | (LAN fallback) magic packet relay |
+| `twinelink.remote.session` | phone to desktop        | request an RDP session            |
+| `twinelink.remote.ready`   | desktop to phone        | host/port/creds/fingerprint       |
+| `twinelink.remote.end`     | both                    | session teardown                  |
 
 ## Handshake
 

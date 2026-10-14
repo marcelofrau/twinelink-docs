@@ -5,11 +5,7 @@ import prettier from 'eslint-config-prettier'
 
 export default [
   {
-    ignores: [
-      'node_modules/**',
-      'docs/.vitepress/dist/**',
-      'docs/.vitepress/cache/**',
-    ],
+    ignores: ['node_modules/**', 'docs/.vitepress/dist/**', 'docs/.vitepress/cache/**'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

@@ -1,6 +1,6 @@
 # Startup performance — diagnosis and targets
 
-This document records *why* upstream KDE Connect feels slow on Windows and the
+This document records _why_ upstream KDE Connect feels slow on Windows and the
 plan to fix it. It is evidence-based: findings cite the upstream source.
 
 ## Evidence (upstream KDE Connect)
@@ -11,7 +11,7 @@ Each of the three binaries is a full Qt6 + KDE Frameworks application.
    `KF6::Notifications`, `KF6::ColorScheme`, `Qt::QuickControls2`,
    `Qt::Widgets` (`daemon/CMakeLists.txt`). The UI app links `Qt::Quick`,
    `Qt::QuickControls2`, `Qt::Widgets`, `KF6::CoreAddons/I18n/I18nQml/
-   ColorScheme/ItemModels/DBusAddons/WindowSystem` (`app/CMakeLists.txt`).
+ColorScheme/ItemModels/DBusAddons/WindowSystem` (`app/CMakeLists.txt`).
    On Windows, cold start pays disk + Defender scan for every DLL.
 2. **Forced Breeze everywhere.** `KColorSchemeManager::instance()` +
    `QApplication::setStyle("breeze")` + `QIcon::setThemeName("breeze")` run in
@@ -34,13 +34,13 @@ Each of the three binaries is a full Qt6 + KDE Frameworks application.
 
 See [NFR-1..NFR-5](../requirements/non-functional.md). Summary:
 
-| Metric | Target |
-| --- | --- |
+| Metric                           | Target   |
+| -------------------------------- | -------- |
 | Daemon service registered (warm) | < 500 ms |
-| Daemon service registered (cold) | < 2 s |
-| Main window visible | < 300 ms |
-| Main window interactive | < 800 ms |
-| Session start to first frame | < 3 s |
+| Daemon service registered (cold) | < 2 s    |
+| Main window visible              | < 300 ms |
+| Main window interactive          | < 800 ms |
+| Session start to first frame     | < 3 s    |
 
 ## Remediation plan
 

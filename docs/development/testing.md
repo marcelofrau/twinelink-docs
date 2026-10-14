@@ -1,49 +1,40 @@
-# Testing strategy
+# Testing
 
-Testing is part of every change, not an afterthought. Each OpenSpec change
-includes a `tasks.md` whose items cover tests, and CI enforces the gates.
+## Philosophy
 
-## Levels
+Tests are part of the definition of done. New logic ships with tests. Tests are
+deterministic and run in CI.
 
-```mermaid
-flowchart LR
-  Unit[Unit tests] --> Integration[Integration tests] --> Manual[Manual device tests] --> E2E[End-to-end]
-```
+## Unit tests
 
-- **Unit** — pure logic: packet encode/decode, WoL magic-packet builder,
-  session-info validation, provider registry.
-- **Integration** — two processes/sides: control-plane handshake, capability
-  negotiation, a managed RDP session against a test host.
-- **Manual device tests** — real Windows + Android hardware; recorded as a
-  checklist in the change (format, flow, expected result).
-- **End-to-end** — automated where feasible (networking harness); otherwise the
-  documented manual checklist.
-
-## Framework per layer
-
-| Layer | Framework |
-| --- | --- |
-| C++ / Qt | Qt Test (`QTest`) |
-| Kotlin / Android | JUnit 5 + Robolectric; instrumented tests where needed |
-| Docs / TS | Vitest |
+| Area               | Framework | Notes                                     |
+| ------------------ | --------- | ----------------------------------------- |
+| Desktop core (C++) | Qt Test   | plugin, provider, negotiation logic       |
+| Android (Kotlin)   | JUnit     | view models, controllers, packet handling |
+| Docs tooling (TS)  | minimal   | build must succeed; ESLint gates config   |
 
 ## Coverage
 
-- Coverage is measured (C++: `gcov`/`llvm-cov`; Kotlin: JaCoCo).
-- Target: no decrease on a PR; new code should be covered.
-- Coverage is reported in CI but is not the sole gate — behavior matters.
+Aim for meaningful coverage of core logic (target 70% on core modules). Coverage
+is reported in CI; regressions are flagged, not silently accepted.
 
-## What every change must include
+## Integration
 
-- [ ] At least one unit test for new logic.
-- [ ] An integration or manual test where the feature crosses the wire or a
-      device boundary.
-- [ ] Failed-approach notes for anything that did not work (so we do not repeat
-      it).
+- Control-plane handshake and capability negotiation between the two apps.
+- Remote-session negotiation (without real media) using the provider interface.
+- Wake-on-LAN packet construction (magic packet correctness).
 
 ## Instrumentation
 
-For performance work (see
-[startup performance](../architecture/startup-performance.md)), tests and logs
-must carry **per-line timestamps** so measurements are provable rather than
-asserted.
+Startup and latency are measured with per-line timestamped logs, not by feel. The
+measurement points are defined in the startup-performance document.
+
+## Real-device verification
+
+Desktop changes are verified on real Windows hardware; Android changes on a real
+device. Build-only success is not acceptance.
+
+## Failure visibility
+
+No failure is swallowed. Errors are logged and, where user-facing, surfaced in
+the UI.

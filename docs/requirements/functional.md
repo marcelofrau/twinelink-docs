@@ -1,56 +1,42 @@
 # Functional requirements
 
-Numbered, testable requirements. Each maps to specs and milestones in the
-[plan](../plan/roadmap.md).
+## Base device link (inherited from KDE Connect)
 
-## Core device link (inherited from KDE Connect)
+- **FR-1** The user can pair a phone and a computer with mutual confirmation.
+- **FR-2** Paired devices can exchange clipboard contents.
+- **FR-3** The user can send and receive files.
+- **FR-4** The computer can mirror the phone notifications.
+- **FR-5** The phone can act as a remote input/pointer for the computer.
+- **FR-6** Media playback can be controlled from the phone.
+- **FR-7** Paired devices reconnect automatically without re-pairing.
 
-- **FR-1** Pair two devices over the LAN with mutual TLS and a user-approved
-  pairing step.
-- **FR-2** Discover peers automatically on the local network (UDP 1716 and
-  mDNS).
-- **FR-3** Share the clipboard bidirectionally between paired devices.
-- **FR-4** Send and receive files between paired devices.
-- **FR-5** Mirror phone notifications to the desktop and dismiss them from
-  either side.
-- **FR-6** Control media playback (MPRIS) from the phone.
-- **FR-7** Use the phone as a remote input device (mousepad / presenter).
+## Wake-on-LAN
 
-## Wake-on-LAN (Twine)
-
-- **FR-10** From the phone, send a Wake-on-LAN magic packet to a configured
-  desktop.
-- **FR-11** The desktop exposes its MAC address and broadcast address to a
-  paired phone.
-- **FR-12** The phone stores per-host WoL configuration for one-tap wake.
-- **FR-13** The UI offers WoL only when a host is configured and reachable on
-  the same network (or via a documented relay).
-
-## Remote desktop (Twine)
-
-- **FR-20** From the phone, start an RDP session to a paired desktop with one
+- **FR-10** A paired phone can wake a sleeping computer on the same LAN with one
   action.
-- **FR-21** The desktop negotiates the session over the control plane and
-  returns host, port, ephemeral credentials and a pinned certificate
+- **FR-11** The computer exposes its MAC address and broadcast address to paired
+  devices.
+- **FR-12** If the phone is not on the same LAN, the app explains that a relay or
+  router feature is required instead of failing silently.
+- **FR-13** The user can store per-host wake configuration.
+
+## Remote desktop
+
+- **FR-20** A paired phone can start a remote desktop session on the computer.
+- **FR-21** The computer orchestrates the session over the control plane and
+  returns host, port, ephemeral credentials and the pinned certificate
   fingerprint.
-- **FR-22** The Android client connects with an embedded FreeRDP client and
-  validates the certificate against the pinned fingerprint.
-- **FR-23** The session supports keyboard and pointer input and returns video
-  using RDPGFX (AVC420 when available).
-- **FR-24** Ending the session releases credentials and resources on both ends.
-- **FR-25** The transport is pluggable: VNC and Moonlight can be added without
-  changing the control plane.
+- **FR-22** The client verifies the pinned fingerprint before connecting.
+- **FR-23** The session uses a transport provider (FreeRDP first).
+- **FR-24** The user can end the session; credentials and processes are released.
+- **FR-25** Latency and image quality are adequate for desktop use on a LAN.
 
-## UX (Twine)
+## UX
 
-- **FR-30** The desktop opens its main window in under the NFR-5 budget from a
-  resident process (no cold process spawn).
-- **FR-31** Both clients follow a consistent, documented design language.
-- **FR-32** The desktop runs in the system tray and starts on logon.
-
-## Compatibility
-
-- **FR-40** A Twine device interoperates with a stock KDE Connect peer for all
-  FR-1..FR-7 capabilities.
-- **FR-41** Twine-only features degrade gracefully (are hidden) with stock
-  peers.
+- **FR-30** The desktop client starts fast and the main window opens without a
+  process spawn.
+- **FR-31** The Android UI is modern (Material 3) and consistent with the
+  desktop.
+- **FR-40** Twine-only features require the peer to advertise the capability, so
+  stock KDE Connect peers are unaffected.
+- **FR-41** A peer without a capability never receives packets for that feature.

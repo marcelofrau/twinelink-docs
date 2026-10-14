@@ -22,13 +22,13 @@ and the window, eliminating the cold-start cost of opening the UI. See
 
 ## Dependencies to shed on Windows
 
-| Framework | Why | Replacement |
-| --- | --- | --- |
-| `KF6::KIOWidgets` | heavy I/O stack in the daemon | `QNetworkAccessManager`, `QFile` |
-| `KF6::ColorScheme` / Breeze style | forced style + icon theme | native style + baked QRC icons |
-| `KF6::Notifications` | desktop notify | native Windows toasts |
-| `Qt::QuickControls2` in daemon | unused | none |
-| `KF6::I18n` at startup | eager translation load | lazy |
+| Framework                         | Why                           | Replacement                      |
+| --------------------------------- | ----------------------------- | -------------------------------- |
+| `KF6::KIOWidgets`                 | heavy I/O stack in the daemon | `QNetworkAccessManager`, `QFile` |
+| `KF6::ColorScheme` / Breeze style | forced style + icon theme     | native style + baked QRC icons   |
+| `KF6::Notifications`              | desktop notify                | native Windows toasts            |
+| `Qt::QuickControls2` in daemon    | unused                        | none                             |
+| `KF6::I18n` at startup            | eager translation load        | lazy                             |
 
 ## Build
 

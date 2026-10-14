@@ -31,12 +31,12 @@ openspec context --store twinelink --code-workspace twinelink.code-workspace
 
 ## Where things live
 
-| Need | Location |
-| --- | --- |
-| Architecture, requirements, roadmap | `docs/` |
-| Desktop code | `desktop/` |
-| Android code | `android/` |
-| Specs hub (OpenSpec store) | `docs/openspec/` |
+| Need                                | Location         |
+| ----------------------------------- | ---------------- |
+| Architecture, requirements, roadmap | `docs/`          |
+| Desktop code                        | `desktop/`       |
+| Android code                        | `android/`       |
+| Specs hub (OpenSpec store)          | `docs/openspec/` |
 
 ## Conventions
 

@@ -1,67 +1,51 @@
-# Conventions & code standards
+# Conventions and code standards
 
-## Language of the repositories
+## Language
 
-Everything committed to any Twine repository is written in **English**:
-code identifiers, comments, commit messages, documentation, issue/PR text,
-branch names, ADRs, and OpenSpec artifacts. Working chat with maintainers may be
-in any language; the repository is English-only.
+Everything committed - code, comments, commit messages, docs, PRs - is in
+**English**. Conversation between maintainers may be in any language.
 
-## Design principles
+## Branching and commits
 
-Twine follows **SOLID** and general clean-code practice. Concretely, in this
-codebase:
+- Branches: `feat/<topic>`, `fix/<topic>`, `docs/<topic>`, `chore/<topic>`.
+- Commits: **Conventional Commits** (`feat:`, `fix:`, `docs:`, `refactor:`,
+  `test:`, `chore:`).
+- PRs: one concern each; red CI blocks merge; squash-merge.
 
-- **Single Responsibility** — each plugin does one job; each transport provider
-  handles one protocol; per-process binaries have one responsibility.
-- **Open/Closed** — new transports (VNC, Moonlight) are added by implementing
-  `RemoteSessionProvider`; core protocol code is not modified.
-- **Liskov Substitution** — any provider can stand in for another wherever a
-  provider is required; the control plane treats them uniformly.
-- **Interface Segregation** — narrow, purpose-specific interfaces (provider,
-  host, packet handler) instead of one fat interface.
-- **Dependency Inversion** — the presentation layer depends on the DBus
-  abstraction, not on core internals; transports depend on a small interface,
-  not on concrete clients.
+## Architecture principles
 
-Additional rules:
+All code follows **SOLID**:
 
-- Keep functions small and single-purpose.
-- Prefer composition over inheritance.
-- No unrelated refactors in a feature PR (see [CONTRIBUTING](../../CONTRIBUTING.md)).
-- Every change is backed by an OpenSpec change with specs and tasks.
+- **S**ingle responsibility - one plugin/provider/module does one job.
+- **O**pen/closed - new transports and plugins are added without editing the
+  core.
+- **L**iskov - providers are interchangeable behind the interface.
+- **I**nterface segregation - narrow interfaces (`RemoteSessionProvider`).
+- **D**ependency inversion - the UI depends on the DBus abstraction, not on core
+  internals; the core depends on interfaces, not concrete transports.
 
-## Branches & commits
+Prefer small, testable units and explicit dependencies.
 
-- Branch names: `feat/<topic>`, `fix/<topic>`, `chore/<topic>`, `docs/<topic>`.
-- Branch off `main`, open a PR, squash-merge, delete the branch.
-- Commit messages: **Conventional Commits** (`feat:`, `fix:`, `docs:`,
-  `chore:`, `refactor:`, `test:`, `ci:`, `perf:`).
+## Static analysis and compilation tooling
 
-## Style & tooling by language
+Quality is enforced by tooling, not by convention alone. Per language:
 
-| Layer | Language | Format | Static analysis | Compile gate |
-| --- | --- | --- | --- | --- |
-| Desktop | C++17 / Qt6 / KF6 | `clang-format` | `clang-tidy`, `cppcheck` | `cmake --build`, warnings-as-errors; ASan/UBSan in CI debug |
-| Desktop build | CMake | `cmake-format` | `cmake-lint` | configure + build |
-| Android | Kotlin | `ktlint` | `detekt`, Android Lint | Gradle `assembleDebug` |
-| Android deps | Gradle | — | Dependency analysis | `./gradlew build` |
-| Docs site | TypeScript/Vue | `prettier` | `eslint` (flat config), `vue-tsc` typecheck | VitePress build |
-| Markdown | — | `prettier` | `markdownlint-cli2` | — |
-| Workflows | YAML | `prettier` | `actionlint`, `yamllint` | — |
-| Scripts | PowerShell/Bash | — | `PSScriptAnalyzer` / `shellcheck` | — |
+| Language                | Format         | Lint / static analysis           | Type / build checks                                         |
+| ----------------------- | -------------- | -------------------------------- | ----------------------------------------------------------- |
+| C++ / Qt (desktop)      | `clang-format` | `clang-tidy`, `cppcheck`, IWYU   | warnings-as-errors, ASan/UBSan on debug CI                  |
+| Kotlin (android)        | `ktlint`       | `detekt`, Android Lint           | `assembleDebug`, javac/kt warnings-as-errors where possible |
+| TypeScript / Vue (docs) | `prettier`     | `eslint` (flat config)           | VitePress build, `vue-tsc`                                  |
+| Markdown                | `prettier`     | `markdownlint-cli2`              | link check                                                  |
+| YAML / CI               | -              | `actionlint`, `yamllint`         | -                                                           |
+| Shell / PowerShell      | -              | `shellcheck`, `PSScriptAnalyzer` | -                                                           |
 
-`eslint` is used where JavaScript/TypeScript exists (the documentation site and
-any tooling) — for other languages the equivalent static-analysis tool listed
-above applies. The principle is the same across the project: **formatter +
-linter + static analyzer + compile gate**, enforced in CI.
+Every repository runs these in CI; a failure blocks merge.
 
-## Testing
+## Sizing
 
-See [testing](./testing.md). Every feature PR ships tests; the default is unit
-tests plus, where relevant, integration tests.
+Prefer functions that fit on a screen and files that stay under a few hundred
+lines. Split rather than nest.
 
-## CI gates
+## No comments unless asked
 
-Every repository's CI must, at minimum: format check, lint, static analysis,
-build, and test. Red CI blocks merge.
+Comments explain intent, not mechanics; keep them rare and meaningful.

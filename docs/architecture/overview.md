@@ -58,12 +58,12 @@ video — it only negotiates.
 
 ## Components
 
-| Component | Repo | Role |
-| --- | --- | --- |
+| Component     | Repo                | Role                                                                                   |
+| ------------- | ------------------- | -------------------------------------------------------------------------------------- |
 | Twine desktop | `twinelink-desktop` | Daemon (control plane) + resident Qt Quick UI + RDP host orchestration + WoL responder |
-| Twine Android | `twinelink-android` | Compose UI + core + embedded FreeRDP client + WoL sender |
-| Docs & specs | `twinelink-docs` | This site, OpenSpec store, architecture, requirements, roadmap |
-| Meta | `twinelink` | Submodule superproject tying the repos together |
+| Twine Android | `twinelink-android` | Compose UI + core + embedded FreeRDP client + WoL sender                               |
+| Docs & specs  | `twinelink-docs`    | This site, OpenSpec store, architecture, requirements, roadmap                         |
+| Meta          | `twinelink`         | Submodule superproject tying the repos together                                        |
 
 ## Process model (desktop)
 
