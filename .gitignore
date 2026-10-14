@@ -1,0 +1,29 @@
+# Node / docs
+node_modules/
+.npm/
+.pnpm-store/
+
+# VitePress
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+.vitepress/dist/
+.vitepress/cache/
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+out/
+
+# Env
+.env
+.env.*
