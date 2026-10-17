@@ -3,6 +3,70 @@
 Running project journal. Append new entries at the top. Purpose: let any
 contributor or AI agent continue the work across sessions. English only.
 
+## 2026-10-17 - M1 started: startup trace and the first measured baseline
+
+Implemented the measurement half of `windows-startup-perf` (tasks 1.1 and 1.2).
+
+### Instrumentation
+
+- `core/startuptrace.{h,cpp}`: per-line timestamped startup trace, exported by
+  `kdeconnectcore`. Fields: `proc_ms` (since OS process creation, via
+  `GetProcessTimes` / `/proc`), `lib_us` (since the trace library was loaded),
+  `delta_us` (since the previous mark), plus wall clock, pid and process name.
+  On by default; `TWINELINK_STARTUP_TRACE=0` silences it,
+  `TWINELINK_STARTUP_TRACE_FILE` captures to a file, flushed per line.
+- Marks in the daemon (`daemon/kdeconnectd.cpp`, `core/daemon.cpp`,
+  `daemon/desktop_daemon.cpp`), the UI (`app/main.cpp`, including first frame via
+  `QQuickWindow::frameSwapped` and first input via an event filter) and the tray
+  (`indicator/main.cpp`).
+- The UI process does not link `kdeconnectcore` (it must stay slim), so it
+  compiles its own copy of the trace (`KDECONNECT_STARTUPTRACE_STATIC`).
+
+### Measured (dev machine, warm, `RelWithDebInfo`)
+
+Three runs each, min / median / max:
+
+- Daemon: `org.kde.kdeconnect` registered **191 / 206 / 240 ms** after process
+  creation.
+- App: first frame **2228 / 2241 / 2267 ms**, of which **2.17 s** is the QML
+  engine and module load; everything the C++ side does fits in 96 ms. A first
+  QML load without a compiled or disk cache measured **7.9 s**.
+- Indicator: tray icon visible **94 / 101 / 109 ms**.
+
+Method, the per-phase table and the harness script
+(`desktop/tools/measure-startup.ps1`) are in
+`docs/architecture/startup-performance.md`.
+
+### New evidence (recorded as finding 7)
+
+The daemon spawns the tray and the tray spawns the daemon, both unconditionally
+(`daemon/kdeconnectd.cpp`, `indicator/main.cpp` +
+`indicator/indicatorhelper_win.cpp`). Duplicate suppression rests entirely on
+`KDBusService::Unique`, i.e. on a working session bus; without one, starting the
+tray boots a second daemon and a second tray.
+
+### Tooling corrections
+
+- `.clang-format` contradicted the codebase (column limit 100, left-aligned
+  pointers, `Cpp11BracedListStyle` off), so a whole-file check would have
+  reformatted every upstream file it touched — unacceptable for a fork that
+  pulls upstream security fixes by hand. Corrected to match the existing KDE
+  style; repo-wide violations dropped from 109 files to 80.
+- CI now checks only the lines a change touches
+  (`git-clang-format-18 --binary clang-format-18 --diff <base> HEAD`), pinned to
+  clang-format 18.
+- Local build recipe that works: enter the VS2022 **Community** developer shell,
+  then prepend `C:\CraftRoot\bin` to `PATH`. Craft's `craftenv.ps1` selects the
+  BuildTools toolchain and the build fails.
+- `docs:build` fails locally with 19–20 "dead link" errors for links that
+  resolve fine in CI. Cause found: this machine reaches the workspace both as
+  `F:\workspace\twinelink` (real) and `C:\Users\marcelo\workspace\twinelink`
+  (junction); VitePress resolves files to the `F:` path but links against the
+  `C:` root. Run npm/vitepress from `F:\workspace\twinelink\docs` and the build
+  passes. Not a Node version issue (reproduced on Node 26 and 20).
+
+Next: task 1.3 (cold baseline on the release machine), then the cheap wins (2.x).
+
 ## 2026-10-14 - Dev environment ready (desktop, M1 enabler)
 
 Installed a reproducible local Windows build for the desktop client:
