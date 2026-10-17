@@ -8,10 +8,10 @@ is not done until its checklist is complete and verified on real hardware.
 
 - [x] Repositories created: `twinelink`, `twinelink-desktop`, `twinelink-android`, `twinelink-docs`
 - [x] Meta superproject with submodules
-- [ ] OpenSpec initialised in each repo + docs store registered
-- [ ] Documentation skeleton (this site)
-- [ ] Governance: CONTRIBUTING, SECURITY, CODE_OF_CONDUCT, LICENSE
-- [ ] CI skeletons
+- [x] OpenSpec initialised in each repo + docs store registered
+- [x] Documentation skeleton (this site)
+- [x] Governance: CONTRIBUTING, SECURITY, CODE_OF_CONDUCT, LICENSE
+- [x] CI skeletons
 
 ## M1 - Desktop startup performance
 
